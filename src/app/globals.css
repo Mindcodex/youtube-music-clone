@@ -5,6 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --yt-item-carrousel-size: calc((min(calc(100vw - 200px - 72px - 12px),1478px) - 5 * 24px)/6);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,3 +26,10 @@ body {
     text-wrap: balance;
   }
 }
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
+

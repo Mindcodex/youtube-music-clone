@@ -1,6 +1,17 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Sidebar from "@/components/Sidebar";
+import { IoIosSearch } from "react-icons/io";
+import { Input } from "@/components/ui/input";
+import { FaChromecast } from "react-icons/fa";
+import { ToggleProvider } from "@/context/ToggleSideBarContext";
+import { MdMenu } from "react-icons/md";
+import Topbar from "@/components/Topbar";
+import ResponsiveMenu from "@/components/ResponsiveMenu";
+import Player from "@/components/Player";
+import { SongProvider } from "@/context/SongContext";
+;
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,13 +34,23 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <SongProvider>
+        <ToggleProvider>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black `}
+          >
+            <Sidebar />
+            <Topbar />
+            <ResponsiveMenu />
+            <Player />
+            {children}
+
+          </body>
+        </ToggleProvider>
+      </SongProvider>
     </html>
   );
 }
