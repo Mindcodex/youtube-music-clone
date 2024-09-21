@@ -9,7 +9,7 @@ export const Nav = ({ sidebarIsClosed }: { sidebarIsClosed: boolean }) => {
         <nav className="space-y-4">
             {pagesLinks.map(pageLink => {
                 return (
-                    <NavButton sidebarIsClosed={sidebarIsClosed} name={pageLink.linkName} key={pageLink.linkName}>
+                    <NavButton sidebarIsClosed={sidebarIsClosed} name={pageLink.linkName} key={pageLink.linkName} href={pageLink.href}>
                         {pageLink.icon}
                     </NavButton>
                 )

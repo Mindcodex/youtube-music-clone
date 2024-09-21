@@ -1,19 +1,35 @@
 "use client"
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { MdMenu } from 'react-icons/md'
 import { FaChromecast } from 'react-icons/fa'
 import { ToggleSidebarContext } from '@/context/ToggleSideBarContext'
 import SearchBox from './SearchBox'
 import { IoIosSearch } from 'react-icons/io'
 const Topbar = () => {
-    const closeBar = useContext(ToggleSidebarContext)
+  const closeBar = useContext(ToggleSidebarContext)
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY;
+    setIsScrolled(scrollPosition > 0);
+    console.log(scrollPosition)
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('click', handleScroll);
+    };
+  }, []);
     const handleBar = () => {
         if (closeBar.isClosed) closeBar.toggle(false)
         else closeBar.toggle(true)
         console.log(closeBar.isClosed)
     }
+
     return (
-        <header className="h-16 w-full bg-black border-b border-b-[#444] fixed z-10 py-3 sm:p-0 ">
+        <header className={`h-16 w-full fixed border-b-[#222] z-10 py-3 sm:p-0 transition-colors  ${isScrolled? 'bg-black border-b ' :  'bg-transparent'} `}>
             <img className='w-[80px] h-6 absolute left-[70px] top-5 z-10' src="/ytMusic.svg" alt="" />
             <section className='flex items-center justify-between '>
                 <div className='flex w-16 h-full items-center pl-4 mr-4'>

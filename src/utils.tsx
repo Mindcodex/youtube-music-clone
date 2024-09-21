@@ -4,24 +4,29 @@ import { SiYoutubemusic } from "react-icons/si";
 type PageLinksInfo = {
     linkName: string,
     icon: React.ReactNode
+    href: string
 }
 export type PageLinks = PageLinksInfo[]
 export const pagesLinks:PageLinks = [
     {
         linkName: "Principal",
-        icon: <GoHomeFill size={24} key="HomeIcon"/>
+        icon: <GoHomeFill size={24} key="HomeIcon"/>,
+        href: "/"
     },
     {
         linkName: "Explorar",
-        icon:<MdOutlineExplore size={24} key="ExploreIcon"/>
+        icon:<MdOutlineExplore size={24} key="ExploreIcon"/>,
+        href: "#"
     },
     {
         linkName: "Biblioteca",
-        icon:<MdOutlineLibraryMusic size={24} key="LibraryMusicIcon"/>
+        icon:<MdOutlineLibraryMusic size={24} key="LibraryMusicIcon"/>,
+        "href": "#"
     },
     {
         linkName: "Actualizar",
-        icon:<SiYoutubemusic size={24} key="YTMusicIcon"/>
+        icon:<SiYoutubemusic size={24} key="YTMusicIcon"/>,
+        href: "#"
     }
 ]
 export  const rgbToHex = (r:number, g:number, b:number) => '#' + [r, g, b].map(x => {

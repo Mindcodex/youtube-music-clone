@@ -13,10 +13,39 @@ import { SongContext } from '@/context/SongContext';
 
 const Player = () => {
     const [currentTime, setCurrentTime] = useState(0)
+    const [songIndex, setSongIndex] = useState(0)
     const audioRef = useRef<HTMLAudioElement>(null)
-    const {currentMusic, isPlaying, setIsPlaying} = useContext(SongContext)
+    const {currentMusic, isPlaying, setIsPlaying, setCurrentMusic} = useContext(SongContext)
     const { song, playlist, songs } = currentMusic
-
+    const forward = () =>{
+        if(song && songs && songIndex < songs?.length - 1){
+          setCurrentMusic(
+            {
+                song: songs[songIndex + 1],
+                playlist,
+                songs
+            }
+          )
+          setSongIndex(songIndex + 1)
+          setIsPlaying(true)
+        }
+        else return
+    }
+    const backward = () =>{
+        if(song && songs && songIndex > 0){
+            setCurrentMusic(
+              {
+                  song: songs[songIndex - 1],
+                  playlist,
+                  songs
+              }
+            )
+            setSongIndex(songIndex - 1)
+            setIsPlaying(true)
+        }
+        else return
+        
+    }
     const play = () =>{
       setIsPlaying(!isPlaying)
     }
@@ -24,7 +53,7 @@ const Player = () => {
         isPlaying? 
         audioRef.current?.play():
         audioRef.current?.pause()    
-    },[isPlaying])
+    },[isPlaying, songIndex])
     
     useEffect(()=>{
         if (song && audioRef.current && isPlaying) {
@@ -32,7 +61,7 @@ const Player = () => {
           audioRef.current.src = src
          //   audioRef.current.volume = volume
           audioRef.current.play()
-          
+          if(currentMusic.song) setSongIndex(currentMusic?.song?.id - 1?? 0)
         }
     },[currentMusic])
     useEffect(() => {
@@ -49,6 +78,8 @@ const Player = () => {
 
     const formatTime = (time: number) => {
         if (time == null) return `0:00`
+        if (time == undefined) return `0:00`
+        if (time == 0) return `0:00`
 
         const seconds = Math.floor(time % 60)
         const minutes = Math.floor(time / 60)
@@ -59,7 +90,7 @@ const Player = () => {
     const duration = audioRef?.current?.duration ?? 0
 
     return (
-        <div className='w-full h-[72px] flex justify-between bg-[#212121] fixed bottom-0 z-10  sm:px-0'>
+        <div className={`w-full h-[72px] justify-between bg-[#212121] fixed bottom-0 z-10 sm:px-0 ${currentMusic.song?.id? "flex" : "hidden"}`}>
             <Slider
                 value={[currentTime]}
                 max={audioRef?.current?.duration ?? 0}
@@ -71,11 +102,11 @@ const Player = () => {
 
             <audio ref={audioRef} />
             <div className='h-full flex justify-center items-center order-2 sm:-order-1 px-4 sm:px-0'>
-                <button className='p-2 ml-2 hidden sm:block'><IoPlaySkipBackSharp size={20} className='text-[#909090]' /></button>
+                <button className='p-2 ml-2 hidden sm:block' onClick={backward}><IoPlaySkipBackSharp size={20} className='text-[#909090]' /></button>
                 <button onClick={play} className='p-2 ml-2'>
                    {isPlaying? <IoPauseSharp size={24} className="text-[#909090]"/>: <IoPlaySharp size={36} className='text-[#909090]' />} 
                 </button>
-                <button className='p-2 ml-2'><IoPlaySkipForwardSharp size={20} className='text-[#909090]' /></button>
+                <button className='p-2 ml-2' onClick={forward}><IoPlaySkipForwardSharp size={20} className='text-[#909090]' /></button>
                 <span className='hidden sm:block ml-2 mr-4 text-[12px] text-[#aaa]'>{formatTime(currentTime)?? "0:00"} / {formatTime(duration)?? "0:00"}</span>
             </div>
             <div className='flex h-full justify-center items-center px-4 sm:px-0'>

@@ -10,48 +10,36 @@ import { IoPauseSharp, IoPlaySharp } from "react-icons/io5";
 type Props = {
     song: Song
     listId: string
+    selected:number
 }
 
 
 
-export const SongListItem = ({song, listId}:Props) => {
-    const [listened, setListened] = useState(false)
+export const SongListItem = ({song, listId, selected}:Props) => {
+    const [index, setIndex] = useState(0)
     const { setCurrentMusic, setIsPlaying, isPlaying, currentMusic } = useContext(SongContext)
     const songList = songs.filter(song => song.albumId == Number(listId))
-    const playlist = playlists.filter(playlist => playlist.id == listId)[0]
-    const $li = useRef<HTMLLIElement>(null)
-    const $ul = $li.current?.parentElement?.children
-    const songId = currentMusic.song?.id
+    const songIndex: number = currentMusic?.song?.id ?? 0 
 
-    useEffect(()=>{
-        if(!isPlaying) setListened(false)
-        
-    },[isPlaying])
-    const handleClick = (e: any) => {
-        const id = e.currentTarget.nextSibling.textContent
-        if (id == currentMusic.song?.id) {
+    const handleClick = (i: number) => {
+        setIndex(i);
+        if ( songIndex - 1 == i) {
             setIsPlaying(!isPlaying)
-            setListened(!listened)
             return
         }
-        if($ul && id != songId){
-            $ul[Number(songId) - 1]?.classList.remove("bg-white/10")
-        }
         setCurrentMusic({
-            playlist,
+            song: songList[i],
             songs: songList,
-            song: songList[Number(id) - 1]
+            playlist: playlists[Number(listId) - 1]
         })
-        setIsPlaying(true)
-        setListened(true)
-        $li.current?.classList.add("bg-white/10")
+        setIsPlaying(true)  
     }
 
     return (
-        <li className="px-4 mb-2 flex items-center justify-between w-full py-2 rounded-lg group " ref={$li} id={song.id + ""} >
+        <li className={`xl:px-4 mb-2 flex items-center justify-between w-full py-2 rounded-lg group ${ selected == songIndex - 1? "bg-white/10" : ""} ` }  >
             <div className="flex items-center">
-                <button className="mr-4 w-12 h-12 justify-center items-center hidden group-hover:flex" onClick={handleClick} >
-                    {listened? (<IoPauseSharp size={24} className="" />) : <IoPlaySharp size={24} />}
+                <button className="mr-4 w-12 h-12 justify-center items-center hidden group-hover:flex" onClick={()=>handleClick(selected)} >
+                    {isPlaying && selected == songIndex - 1? (<IoPauseSharp size={24} className="" />) : <IoPlaySharp size={24} />}
                 </button>
                 <span className="mr-4 w-12 h-12 flex justify-center items-center group-hover:hidden">{song.id}</span>
                 <section>
@@ -61,18 +49,18 @@ export const SongListItem = ({song, listId}:Props) => {
             </div>
             <div className="flex items-center">
                 <div className="hidden gap-x-3 group-hover:flex">
-                    <button className='w-9 h-9 flex justify-center items-center rounded-full hover:bg-white/20 '>
+                    <button className='w-9 h-9 hidden xl:flex justify-center items-center rounded-full hover:bg-white/20 '>
                         <AiOutlineLike size={24} className='rotate-180' />
                     </button>
-                    <button className='w-9 h-9 flex justify-center items-center rounded-full hover:bg-white/20 '>
+                    <button className='w-9 h-9 hidden xl:flex justify-center items-center rounded-full hover:bg-white/20 '>
                         <AiOutlineLike size={24} />
                     </button>
                     <button className='w-9 h-9 flex justify-center items-center rounded-full hover:bg-white/20 '>
                         <BsThreeDotsVertical size={20} />
                     </button>
                 </div>
-                <Checkbox id="terms" className="hidden sm:group-hover:block ml-8" />
-                <span className="ml-8 text-sm xl:text-base group-hover:hidden" >
+                <Checkbox id="terms" className="hidden group-hover:block ml-8 mr-4 xl:mr-0" />
+                <span className="ml-8 mr-4 xl:mr-0 text-sm xl:text-base group-hover:hidden" >
                     {song.duration}
                 </span>
             </div>
