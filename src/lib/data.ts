@@ -318,4 +318,50 @@ export const songs: Song[] = [
         "album": "Chill Lo-Fi Music",
         "duration": "4:20"
     },
+    {   id: 1,
+        albumId: 6,
+        album: "Like a Necessity",
+        image: "/a0363730459_16.jpg",
+            // "https://f4.bcbits.com/img/a0363730459_16.jpg",
+        artists: ["WFS", "Nadav Cohen"],
+        title: "Moonlit Walk",
+        duration: "1:57"
+    },
+    {   id: 2,
+        albumId: 6,
+        album: "Like a Necessity",
+        image: "/a0363730459_16.jpg",
+            // "https://f4.bcbits.com/img/a0363730459_16.jpg",
+        artists: ["WFS", "Nadav Cohen"],
+        title: "Coffee Daze",
+        duration: "1:49"
+    },
+    {   id: 3,
+        albumId: 6,
+        album: "Like a Necessity",
+        image: "/a0363730459_16.jpg",
+            // "https://f4.bcbits.com/img/a0363730459_16.jpg",
+        artists: ["WFS", "Nadav Cohen"],
+        title: "Skyline Serenade",
+        duration: "2:35"
+    },
+    {   id: 4,
+        albumId: 6,
+        album: "Like a Necessity",
+        image: "/a0363730459_16.jpg",
+            // "https://f4.bcbits.com/img/a0363730459_16.jpg",
+        artists: ["WFS", "Nadav Cohen"],
+        title: "Urban Echoes",
+        duration: "2:49"
+    },
+    {   id: 5,
+        albumId: 6,
+        album: "Like a Necessity",
+        image: "/a0363730459_16.jpg",
+            // "https://f4.bcbits.com/img/a0363730459_16.jpg",
+        artists: ["WFS", "Nadav Cohen"],
+        title: "Night's End",
+        duration: "2:29"
+    }
+
 ]

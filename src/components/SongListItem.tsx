@@ -16,13 +16,12 @@ type Props = {
 
 
 export const SongListItem = ({song, listId, selected}:Props) => {
-    const [index, setIndex] = useState(0)
     const { setCurrentMusic, setIsPlaying, isPlaying, currentMusic } = useContext(SongContext)
     const songList = songs.filter(song => song.albumId == Number(listId))
     const songIndex: number = currentMusic?.song?.id ?? 0 
 
     const handleClick = (i: number) => {
-        setIndex(i);
+       
         if ( songIndex - 1 == i) {
             setIsPlaying(!isPlaying)
             return
@@ -36,7 +35,7 @@ export const SongListItem = ({song, listId, selected}:Props) => {
     }
 
     return (
-        <li className={`xl:px-4 mb-2 flex items-center justify-between w-full py-2 rounded-lg group ${ selected == songIndex - 1? "bg-white/10" : ""} ` }  >
+        <li className={`xl:px-4 mb-2 flex items-center justify-between w-full py-2 rounded-[8px] group ${ selected == songIndex - 1? "bg-white/10" : ""} ` }  >
             <div className="flex items-center">
                 <button className="mr-4 w-12 h-12 justify-center items-center hidden group-hover:flex" onClick={()=>handleClick(selected)} >
                     {isPlaying && selected == songIndex - 1? (<IoPauseSharp size={24} className="" />) : <IoPlaySharp size={24} />}

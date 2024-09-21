@@ -6,7 +6,7 @@ import { NavButton } from "./NavButton";
 
 export const Nav = ({ sidebarIsClosed }: { sidebarIsClosed: boolean }) => {
     return (
-        <nav className="space-y-4">
+        <nav className="">
             {pagesLinks.map(pageLink => {
                 return (
                     <NavButton sidebarIsClosed={sidebarIsClosed} name={pageLink.linkName} key={pageLink.linkName} href={pageLink.href}>

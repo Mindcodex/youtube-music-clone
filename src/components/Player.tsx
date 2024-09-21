@@ -87,7 +87,8 @@ const Player = () => {
         return `${minutes}:${seconds.toString().padStart(2, '0')}`
     }
 
-    const duration = audioRef?.current?.duration ?? 0
+    const duration:number = audioRef?.current?.duration && !Number.isNaN(audioRef?.current?.duration) ? audioRef?.current?.duration : 0
+    
 
     return (
         <div className={`w-full h-[72px] justify-between bg-[#212121] fixed bottom-0 z-10 sm:px-0 ${currentMusic.song?.id? "flex" : "hidden"}`}>
@@ -107,7 +108,7 @@ const Player = () => {
                    {isPlaying? <IoPauseSharp size={24} className="text-[#909090]"/>: <IoPlaySharp size={36} className='text-[#909090]' />} 
                 </button>
                 <button className='p-2 ml-2' onClick={forward}><IoPlaySkipForwardSharp size={20} className='text-[#909090]' /></button>
-                <span className='hidden sm:block ml-2 mr-4 text-[12px] text-[#aaa]'>{formatTime(currentTime)?? "0:00"} / {formatTime(duration)?? "0:00"}</span>
+                <span className='hidden sm:block ml-2 mr-4 text-[12px] text-[#aaa]'>{formatTime(currentTime)?? "0:00"} / {formatTime(duration)}</span>
             </div>
             <div className='flex h-full justify-center items-center px-4 sm:px-0'>
                 <div className='w-10 h-10 rounded-[2px] bg-[#909090]'>

@@ -29,7 +29,7 @@ const Topbar = () => {
     }
 
     return (
-        <header className={`h-16 w-full fixed border-b-[#222] z-10 py-3 sm:p-0 transition-colors  ${isScrolled? 'bg-black border-b ' :  'bg-transparent'} `}>
+        <header className={`h-16 w-full fixed border-b-[#222] z-10 py-3 sm:p-0 transition-colors  ${closeBar.isClosed || isScrolled? 'bg-black border-b ' :  'bg-transparent'} `}>
             <img className='w-[80px] h-6 absolute left-[70px] top-5 z-10' src="/ytMusic.svg" alt="" />
             <section className='flex items-center justify-between '>
                 <div className='flex w-16 h-full items-center pl-4 mr-4'>
@@ -40,9 +40,11 @@ const Topbar = () => {
                 <div className=" flex sm:py-3 sm:px-[100px] justify-between sm:w-full">
                     <SearchBox/>
                     <div className="flex items-center justify-between space-x-5 pr-4">
-                        <span><IoIosSearch size={24} className=" text-gray-400" /></span>
+                        <span><IoIosSearch size={24} className=" text-gray-400 md:hidden" /></span>
                         <FaChromecast size={24} />
-                        <div className="w-[26px] h-[26px] bg-gray-600 rounded-full"></div>
+                        <div className="w-[26px] h-[26px] bg-gray-600 rounded-full">
+                            <img src="/profile.jpg" alt="profile" className='rounded-full w-[26px] h-[26px]' />
+                        </div>
                     </div>
                 </div>
             </section>

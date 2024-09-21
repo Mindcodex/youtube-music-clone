@@ -62,11 +62,13 @@ export const YTMusicSlider = ({ title, user = false }: Props) => {
         $sliderRef.slickPrev();
     };
     return (
-        <section className="pt-8 mb-16 lg:mb-36 w-full" >
+        <section className="pt-4 xl:pt-8 mb-16 lg:mb-36 w-full" >
             <section className="flex justify-between w-full items-end">
                 <div className="flex justify-between w-full items-end">
                     <div className="flex items-center">
-                        <div className={"w-14 h-14 rounded-full bg-white/25 mr-4 hidden lg:block " + showUser}></div>
+                        <div className={"w-14 h-14 rounded-full bg-white/25 mr-4 hidden lg:block " + showUser}>
+                            <img src="/profile.jpg" alt="profile" className='w-14 h-14 rounded-full' />
+                        </div>
                         <section className="flex flex-col">
                             <h4 className={showUser + " hidden lg:block"}>JOHN DOE</h4>
                             <h2 className="lg:text-[34px] font-bold text-[24px]">{title}</h2>
@@ -81,8 +83,8 @@ export const YTMusicSlider = ({ title, user = false }: Props) => {
             </section>
             <section className=" relative lg:w-full mt-4 ">
                 <Slick ref={(slider: any) => { $sliderRef = slider }} {...settings} >
-                    {playlists.map(playlist => (
-                        <SongCard artists={playlist.artists} key={playlist.title} cover={playlist.cover} name={playlist.title} type='album' id={playlist.id} />
+                    {playlists.map((playlist, index) => (
+                        <SongCard artists={playlist.artists} key={playlist.title} cover={playlist.cover} name={playlist.title} type='album' id={playlist.albumId} />
                     ))}
                 </Slick>
             </section>

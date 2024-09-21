@@ -31,7 +31,7 @@ const Sidebar = () => {
   
 
   return (
-    <aside className={setWidth + `  px-2 pt-2 hidden sm:block h-full fixed z-10 top-[64px] ${isScrolled? ' border-r bg-black border-r-[#222]' :  'bg-transparent'}`}>
+    <aside className={setWidth + ` px-2 pt-2 hidden sm:block h-full fixed z-10 top-[64px] md:pb-[72px] ${isScrolled || closeBar.isClosed? ' border-r bg-black border-r-[#222]' :  'bg-transparent'}`}>
       <Nav sidebarIsClosed={closeBar.isClosed} />
       <Button className={setVisibity + " mt-4 w-full"} variant="secondary">
         {/* <Plus className="w-4 h-4 mr-2" /> Nueva playlist */}
