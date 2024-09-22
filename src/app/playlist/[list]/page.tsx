@@ -6,7 +6,7 @@ import { MdOutlineAddToPhotos } from "react-icons/md";
 import { RiShareForwardFill } from "react-icons/ri";
 import { songs } from "@/lib/data";
 import { SongContext } from "@/context/SongContext";
-import { useContext, useRef, useState, } from "react";
+import { useContext, useRef, } from "react";
 import { BlurBlobs } from "@/components/BlurBlobs";
 import { IoPauseSharp } from "react-icons/io5";
 

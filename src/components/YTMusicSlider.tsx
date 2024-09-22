@@ -80,7 +80,7 @@ export const YTMusicSlider = ({ title, user = false }: Props) => {
             </section>
             <section className=" relative lg:w-full mt-4 ">
                 <Slick ref={$sliderRef} {...settings} >
-                    {playlists.map((playlist, index) => (
+                    {playlists.map((playlist) => (
                         <SongCard artists={playlist.artists} key={playlist.title} cover={playlist.cover} name={playlist.title} type='album' id={playlist.albumId} />
                     ))}
                 </Slick>
