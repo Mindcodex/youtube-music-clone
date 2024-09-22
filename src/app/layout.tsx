@@ -2,16 +2,12 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
-import { IoIosSearch } from "react-icons/io";
-import { Input } from "@/components/ui/input";
-import { FaChromecast } from "react-icons/fa";
 import { ToggleProvider } from "@/context/ToggleSideBarContext";
-import { MdMenu } from "react-icons/md";
 import Topbar from "@/components/Topbar";
 import ResponsiveMenu from "@/components/ResponsiveMenu";
 import Player from "@/components/Player";
 import { SongProvider } from "@/context/SongContext";
-;
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

@@ -4,13 +4,11 @@ import { Nav } from './Nav'
 import { Button } from './ui/button'
 import { ToggleSidebarContext } from '@/context/ToggleSideBarContext'
 import { RxCross1 } from "react-icons/rx";
-import { pagesLinks } from '@/utils'
-import { NavButton } from './NavButton'
+
 
 const ResponsiveMenu = () => {
     const closeBar = useContext(ToggleSidebarContext)
     const showSidebar = closeBar.isClosed ? "translate-x-0" : "-translate-x-64"
-    const setWidth = closeBar.isClosed ? " bg-black border-r bg-black" : "w-[72px] items-center"
     const setVisibity = closeBar.isClosed ? "block" : "hidden"
     return (
         <>

@@ -2,7 +2,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { Nav } from './Nav'
 import { Button } from './ui/button'
-import { MdMenu } from "react-icons/md";
 import { ToggleSidebarContext } from '@/context/ToggleSideBarContext';
 
 

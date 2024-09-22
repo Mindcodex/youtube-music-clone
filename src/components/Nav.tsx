@@ -1,6 +1,4 @@
 import { pagesLinks } from "@/utils";
-import { GoHomeFill } from "react-icons/go";
-import { MdOutlineExplore, MdOutlineLibraryMusic } from "react-icons/md";
 import { NavButton } from "./NavButton";
 
 

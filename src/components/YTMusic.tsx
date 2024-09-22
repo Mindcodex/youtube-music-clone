@@ -1,12 +1,6 @@
-import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { IoIosSearch } from "react-icons/io";
-import { FaChromecast } from "react-icons/fa";
 import { YTMusicSlider } from "./YTMusicSlider";
-import Sidebar from "./Sidebar";
 import { MUSIC_FILTERS } from "../constants";
-import Player from "./Player";
 import { BlurBlobs } from "./BlurBlobs";
 
 

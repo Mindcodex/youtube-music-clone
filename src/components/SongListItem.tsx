@@ -2,7 +2,7 @@
 import { SongContext } from "@/context/SongContext";
 import { playlists, Song, songs } from "@/lib/data";
 import { Checkbox } from "./ui/checkbox";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext} from "react";
 import { AiOutlineLike } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { IoPauseSharp, IoPlaySharp } from "react-icons/io5";

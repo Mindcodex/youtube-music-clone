@@ -4,7 +4,7 @@ type Props = {
   blur?: boolean
 }
 
-export const BlurBlobs = ({ color, img, blur = false }: Props) => {
+export const BlurBlobs = ({ img, blur = false }: Props) => {
   return (
     <>
       <div className="absolute w-full h-[100vh]  bg-gradient-to-b from-[#030303]/60 to-[#030303] to-70% -z-10 top-0 left-0"></div>

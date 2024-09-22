@@ -14,7 +14,7 @@ type Props = {
     type: TypeOfContent
 }
 
-const SongCard = ({ name = "Playlist Name", artists = ["Artist Names"], type = "Type", cover, id, }: Props) => {
+const SongCard = ({ name = "Playlist Name", artists = ["Artist Names"], cover, id, }: Props) => {
     const { setCurrentMusic, setIsPlaying, isPlaying, currentMusic } = useContext(SongContext)
     const songList = songs.filter(song => song.albumId == id)
     const playlistIndex: number = currentMusic.playlist?.albumId ?? 0 

@@ -1,12 +1,9 @@
 "use client"
-//@ts-ignore
-import ColorThief from "colorthief"
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { TfiDownload } from "react-icons/tfi";
 import { IoPlaySharp } from "react-icons/io5";
 import { MdOutlineAddToPhotos } from "react-icons/md";
 import { RiShareForwardFill } from "react-icons/ri";
-import { AiOutlineLike } from "react-icons/ai";
 import { songs } from "@/lib/data";
 import { SongContext } from "@/context/SongContext";
 import { useContext, useEffect, useRef, useState, } from "react";
@@ -25,11 +22,7 @@ const List = ({ params }: Props) => {
     const $listElement = useRef<HTMLUListElement>(null)
     const { isPlaying } = useContext(SongContext)
    
-    useEffect(() => {
-        const colorThief = new ColorThief()
-        const color = colorThief.getColor($img.current)
-        setHexColor(rgbToHex(color[0], color[1], color[2]))
-    }, [])
+ 
     return <main className="pt-[66px] md:px-32 lg:px-32 xl:px-[160.5px] w-full px-4 h-full relative">
         <BlurBlobs color={hexColor} img={playlist.image} blur />
         <section className="mt-[60px] xl:mx-4 flex flex-col xl:flex-row mb-[72px] xl:mb-0">

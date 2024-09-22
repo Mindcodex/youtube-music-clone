@@ -1,5 +1,5 @@
 "use client"
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { MdMenu } from 'react-icons/md'
 import { FaChromecast } from 'react-icons/fa'
 import { ToggleSidebarContext } from '@/context/ToggleSideBarContext'

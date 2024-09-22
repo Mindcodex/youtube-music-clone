@@ -1,14 +1,14 @@
 "use client"
-//@ts-ignore
 import Slick from 'react-slick'
 import { MdChevronLeft } from "react-icons/md";
 import { MdChevronRight } from "react-icons/md";
-import { useContext, useRef, useState } from "react";
-import { ToggleSidebarContext } from "@/context/ToggleSideBarContext";
+import { useRef } from "react";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { playlists, songs } from '@/lib/data';
+import { playlists} from '@/lib/data';
 import SongCard from './SongCard';
+import Slider from 'react-slick';
 type Props = {
     title: string
     user?: boolean
@@ -50,16 +50,15 @@ const settings = {
 };
 
 export const YTMusicSlider = ({ title, user = false }: Props) => {
-    let $sliderRef = useRef(null);
-    const showSidebar = useContext(ToggleSidebarContext).isClosed
+    let $sliderRef = useRef<Slick>(null);
     let showUser = user ? "block" : "hidden"
     const next = () => {
-        //@ts-ignore
-        $sliderRef.slickNext();
+        
+        $sliderRef.current?.slickNext();
     };
     const previous = () => {
-        //@ts-ignore
-        $sliderRef.slickPrev();
+       
+        $sliderRef.current?.slickPrev();
     };
     return (
         <section className="pt-4 xl:pt-8 mb-16 lg:mb-36 w-full" >
@@ -82,7 +81,7 @@ export const YTMusicSlider = ({ title, user = false }: Props) => {
                 </div>
             </section>
             <section className=" relative lg:w-full mt-4 ">
-                <Slick ref={(slider: any) => { $sliderRef = slider }} {...settings} >
+                <Slick ref={$sliderRef} {...settings} >
                     {playlists.map((playlist, index) => (
                         <SongCard artists={playlist.artists} key={playlist.title} cover={playlist.cover} name={playlist.title} type='album' id={playlist.albumId} />
                     ))}

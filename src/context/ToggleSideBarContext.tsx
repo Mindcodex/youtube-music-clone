@@ -6,7 +6,7 @@ type ToggleState = {
 } 
 export const ToggleSidebarContext = createContext<ToggleState>({
     isClosed: true,
-    toggle: (state) => {}
+    toggle: () => {}
 });
 export const ToggleProvider = ({ children }: { children: React.ReactNode }) => {
     const [closeBar, setCloseBar] = useState(false)
