@@ -73,7 +73,7 @@ const Player = () => {
             audioRef.current.src = src
             audioRef.current.volume = volume
             audioRef.current.play()
-            if (currentMusic.song) setSongIndex(currentMusic?.song?.id - 1 ?? 0)
+            if (currentMusic.song) setSongIndex(currentMusic?.song?.id - 1)
         }
     }, [currentMusic])
     useEffect(() => {
