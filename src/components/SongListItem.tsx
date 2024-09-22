@@ -22,7 +22,7 @@ export const SongListItem = ({song, listId, selected}:Props) => {
 
     const handleClick = (i: number) => {
        
-        if ( songIndex - 1 == i) {
+        if ( songIndex - 1 == i && currentMusic.playlist?.albumId == Number(listId)) {
             setIsPlaying(!isPlaying)
             return
         }
@@ -35,10 +35,10 @@ export const SongListItem = ({song, listId, selected}:Props) => {
     }
 
     return (
-        <li className={`xl:px-4 mb-2 flex items-center justify-between w-full py-2 rounded-[8px] group ${ selected == songIndex - 1? "bg-white/10" : ""} ` }  >
+        <li className={`xl:px-4 mb-2 flex items-center justify-between w-full py-2 rounded-[8px] group ${ selected == songIndex - 1 && currentMusic.playlist?.albumId == Number(listId) ? "bg-white/10" : ""} ` }  >
             <div className="flex items-center">
                 <button className="mr-4 w-12 h-12 justify-center items-center hidden group-hover:flex" onClick={()=>handleClick(selected)} >
-                    {isPlaying && selected == songIndex - 1? (<IoPauseSharp size={24} className="" />) : <IoPlaySharp size={24} />}
+                    {isPlaying && selected == songIndex - 1 && currentMusic.playlist?.albumId == Number(listId)? (<IoPauseSharp size={24} className="" />) : <IoPlaySharp size={24} />}
                 </button>
                 <span className="mr-4 w-12 h-12 flex justify-center items-center group-hover:hidden">{song.id}</span>
                 <section>
