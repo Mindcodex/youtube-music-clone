@@ -30,7 +30,7 @@ const Player = () => {
         }
     }
     const forward = () => {
-        if (song && songs && songIndex < songs?.length - 1) {
+        if (song && songs && songIndex < songs?.length - 1 ) {
             setCurrentMusic(
                 {
                     song: songs[songIndex + 1],
@@ -86,9 +86,17 @@ const Player = () => {
     useEffect(() => {
         if (audioRef.current) audioRef.current.volume = volume
     }, [volume])
+    useEffect(() => {
+        if(audioRef && currentTime == audioRef.current?.duration) forward()
+    }, [currentTime])
 
     const handleTimeUpdate = () => {
+        console.log(audioRef.current?.currentTime)
         if (audioRef) setCurrentTime(audioRef.current?.currentTime ?? 0)
+        if(audioRef && audioRef.current?.currentTime == audioRef.current?.duration){
+            console.log(audioRef.current?.currentTime)
+            forward()
+        }
     }
 
     const formatTime = (time: number) => {

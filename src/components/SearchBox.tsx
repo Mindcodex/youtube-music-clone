@@ -27,7 +27,8 @@ const SearchBox = () => {
                 <IoIosSearch size={24} className=" text-[#909090]" />
             </button>
             <Input
-                className="w-full pr-[56px] border-none outline-none text-md text-white pl-0 py-0 placeholder:text- focus-visible: "
+                type='text'
+                className="w-full pr-[56px] border-none focus:outline-0 text-md text-white pl-0 py-0 placeholder:text-  "
                 placeholder="Buscar canciones, álbumes, artistas o podcasts"
             />
         </div>
