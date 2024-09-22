@@ -6,16 +6,15 @@ import { MdOutlineAddToPhotos } from "react-icons/md";
 import { RiShareForwardFill } from "react-icons/ri";
 import { songs } from "@/lib/data";
 import { SongContext } from "@/context/SongContext";
-import { useContext, useEffect, useRef, useState, } from "react";
+import { useContext, useRef, useState, } from "react";
 import { BlurBlobs } from "@/components/BlurBlobs";
 import { IoPauseSharp } from "react-icons/io5";
-import { rgbToHex } from "@/utils";
+
 import { SongListItem } from "@/components/SongListItem";
 type Props = {
     params: { list: string }
 }
 const List = ({ params }: Props) => {
-    const [hexColor, setHexColor] = useState("#000")
     const playlistData = songs.filter(song => song.albumId == Number(params.list))
     const playlist = playlistData[0]
     const $img = useRef<HTMLImageElement>(null)
@@ -24,7 +23,7 @@ const List = ({ params }: Props) => {
    
  
     return <main className="pt-[66px] md:px-32 lg:px-32 xl:px-[160.5px] w-full px-4 h-full relative">
-        <BlurBlobs color={hexColor} img={playlist.image} blur />
+        <BlurBlobs color={""} img={playlist.image} blur />
         <section className="mt-[60px] xl:mx-4 flex flex-col xl:flex-row mb-[72px] xl:mb-0">
             <div className="flex items-center flex-col mb-20 lx:mb-0">
                 <span>{playlist.artists[0]}</span>

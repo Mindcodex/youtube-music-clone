@@ -8,7 +8,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { playlists} from '@/lib/data';
 import SongCard from './SongCard';
-import Slider from 'react-slick';
 type Props = {
     title: string
     user?: boolean
@@ -50,10 +49,9 @@ const settings = {
 };
 
 export const YTMusicSlider = ({ title, user = false }: Props) => {
-    let $sliderRef = useRef<Slick>(null);
-    let showUser = user ? "block" : "hidden"
+    const $sliderRef = useRef<Slick>(null);
+    const showUser = user ? "block" : "hidden"
     const next = () => {
-        
         $sliderRef.current?.slickNext();
     };
     const previous = () => {
