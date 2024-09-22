@@ -14,7 +14,7 @@ export const YTMusic = () => {
 
   return (
     <div className="flex  text-white w-full h-full relative">
-      <BlurBlobs color={"#00ffffaa"} />
+      <BlurBlobs img={"/banner.png"} color="a" />
       <main className="pt-[66px] md:px-14 lg:px-[98.5px] w-full md:ml-[72px] px-8 sm:overflow-hidden" >
         <section className="flex items-center space-x-[12px] mb-6 mt-6 xl:pt-10 pt-5 overflow-hidden">
           {MUSIC_FILTERS.map((category:string) => (
