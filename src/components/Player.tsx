@@ -42,53 +42,46 @@ const Player = () => {
         }
     }
     const forward = () => {
-        if (song && songs && songIndex < songs?.length - 1) {
-            setCurrentMusic(
-                {
-                    song: songs[songIndex + 1],
-                    playlist,
-                    songs
-                }
-            )
-            setSongIndex(songIndex + 1)
-            setIsPlaying(true)
-        } else {
-            if (song && songs && audioRef.current && !isRepeat) {
-                setCurrentMusic(
-                    {
-                        song: songs[0],
-                        playlist,
-                        songs
-                    }
-                )
-                setIsPlaying(false)
-                audioRef.current.currentTime = 0
-            }
-            else {
-                if (songs && !isRepeatOne) {
-                    setCurrentMusic(
-                        {
-                            song: songs[0],
-                            playlist,
-                            songs
-                        }
-                    )
-                    setIsPlaying(true)
-                }
-                else {
-                    if (songs) {
-
-                        setCurrentMusic({
-                            song: songs[songIndex],
-                            playlist,
-                            songs
-                        })
-                    }
-                }
-            }
+        if (!song || !songs) return; 
+    
+        if (songIndex < songs.length - 1 && !RepeatOne) {
+            setCurrentMusic({
+                song: songs[songIndex + 1],
+                playlist,
+                songs,
+            });
+            setSongIndex(songIndex + 1);
+            setIsPlaying(true);
+            return;
         }
-
-    }
+    
+        if (audioRef.current && !isRepeat) {
+            setCurrentMusic({
+                song: songs[0],
+                playlist,
+                songs,
+            });
+            setIsPlaying(false);
+            audioRef.current.currentTime = 0;
+            return;
+        }
+    
+        if (!isRepeatOne) {
+            setCurrentMusic({
+                song: songs[0],
+                playlist,
+                songs,
+            });
+            setIsPlaying(true);
+            return;
+        }
+        console.log()
+        setCurrentMusic({
+            song: songs[songIndex],
+            playlist,
+            songs,
+        });
+    };
     const backward = () => {
         if (song && songs && songIndex > 0 && audioRef.current?.currentTime && audioRef.current?.currentTime < 5) {
             setCurrentMusic(
