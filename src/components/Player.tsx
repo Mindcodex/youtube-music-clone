@@ -41,7 +41,7 @@ const Player = () => {
             setSongIndex(songIndex + 1)
             setIsPlaying(true)
         }
-        else return
+       
     }
     const backward = () => {
         if (song && songs && songIndex > 0) {
@@ -87,7 +87,9 @@ const Player = () => {
         if (audioRef.current) audioRef.current.volume = volume
     }, [volume])
     useEffect(() => {
-        if(audioRef && currentTime == audioRef.current?.duration) forward()
+        if(audioRef && currentTime == audioRef.current?.duration) {
+            forward()
+        }
     }, [currentTime])
 
     const handleTimeUpdate = () => {
