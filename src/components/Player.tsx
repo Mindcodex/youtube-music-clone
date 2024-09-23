@@ -40,11 +40,24 @@ const Player = () => {
             )
             setSongIndex(songIndex + 1)
             setIsPlaying(true)
+        } else{
+            if (song && songs && audioRef.current ) {
+                setCurrentMusic(
+                    {
+                        song: songs[0],
+                        playlist,
+                        songs
+                    }
+                )
+                setSongIndex(-5)
+                setIsPlaying(false)
+                audioRef.current.currentTime = 0
+            }
         }
        
     }
     const backward = () => {
-        if (song && songs && songIndex > 0) {
+        if (song && songs && songIndex > 0 && audioRef.current?.currentTime && audioRef.current?.currentTime < 5) {
             setCurrentMusic(
                 {
                     song: songs[songIndex - 1],
@@ -55,7 +68,19 @@ const Player = () => {
             setSongIndex(songIndex - 1)
             setIsPlaying(true)
         }
-        else return
+        else {
+            if (song && songs ) {
+                setCurrentMusic(
+                    {
+                        song: songs[songIndex],
+                        playlist,
+                        songs
+                    }
+                )
+                setSongIndex(songIndex - 1)
+                setIsPlaying(true)
+            }
+        }
 
     }
     const play = () => {
@@ -93,12 +118,7 @@ const Player = () => {
     }, [currentTime])
 
     const handleTimeUpdate = () => {
-        console.log(audioRef.current?.currentTime)
         if (audioRef) setCurrentTime(audioRef.current?.currentTime ?? 0)
-        if(audioRef && audioRef.current?.currentTime == audioRef.current?.duration){
-            console.log(audioRef.current?.currentTime)
-            forward()
-        }
     }
 
     const formatTime = (time: number) => {
