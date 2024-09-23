@@ -7,17 +7,21 @@ import { BiVolumeFull, BiVolumeMute } from "react-icons/bi";
 import { RiRepeatLine } from "react-icons/ri";
 import { Slider } from './Slider';
 import { SongContext } from '@/context/SongContext';
+import { RepeatOne } from './Icons';
 
 
 
 
 const Player = () => {
     const [currentTime, setCurrentTime] = useState(0)
+    const [isRepeat, setIsRepeat] = useState(false)
+    const [isRepeatOne, setIsRepeatOne] = useState(false)
     const [songIndex, setSongIndex] = useState(0)
     const audioRef = useRef<HTMLAudioElement>(null)
     const { currentMusic, isPlaying, setIsPlaying, setCurrentMusic, volume, setVolume } = useContext(SongContext)
     const { song, playlist, songs } = currentMusic
     const previousVolumeRef = useRef(volume)
+
 
     const isVolumeSilenced = volume < 0.1
 
@@ -29,8 +33,16 @@ const Player = () => {
             setVolume(0)
         }
     }
+    const handleRepeat = () => {
+        if (!isRepeat) setIsRepeat(true)
+        if (isRepeat) setIsRepeatOne(true)
+        if (isRepeat && isRepeatOne) {
+            setIsRepeat(false)
+            setIsRepeatOne(false)
+        }
+    }
     const forward = () => {
-        if (song && songs && songIndex < songs?.length - 1 ) {
+        if (song && songs && songIndex < songs?.length - 1) {
             setCurrentMusic(
                 {
                     song: songs[songIndex + 1],
@@ -40,8 +52,8 @@ const Player = () => {
             )
             setSongIndex(songIndex + 1)
             setIsPlaying(true)
-        } else{
-            if (song && songs && audioRef.current ) {
+        } else {
+            if (song && songs && audioRef.current && !isRepeat) {
                 setCurrentMusic(
                     {
                         song: songs[0],
@@ -49,12 +61,33 @@ const Player = () => {
                         songs
                     }
                 )
-                setSongIndex(-5)
                 setIsPlaying(false)
                 audioRef.current.currentTime = 0
             }
+            else {
+                if (songs && !isRepeatOne) {
+                    setCurrentMusic(
+                        {
+                            song: songs[0],
+                            playlist,
+                            songs
+                        }
+                    )
+                    setIsPlaying(true)
+                }
+                else {
+                    if (songs) {
+
+                        setCurrentMusic({
+                            song: songs[songIndex],
+                            playlist,
+                            songs
+                        })
+                    }
+                }
+            }
         }
-       
+
     }
     const backward = () => {
         if (song && songs && songIndex > 0 && audioRef.current?.currentTime && audioRef.current?.currentTime < 5) {
@@ -69,7 +102,7 @@ const Player = () => {
             setIsPlaying(true)
         }
         else {
-            if (song && songs ) {
+            if (song && songs) {
                 setCurrentMusic(
                     {
                         song: songs[songIndex],
@@ -112,7 +145,7 @@ const Player = () => {
         if (audioRef.current) audioRef.current.volume = volume
     }, [volume])
     useEffect(() => {
-        if(audioRef && currentTime == audioRef.current?.duration) {
+        if (audioRef && currentTime == audioRef.current?.duration) {
             forward()
         }
     }, [currentTime])
@@ -136,7 +169,7 @@ const Player = () => {
 
 
     return (
-        <div className={`w-full h-[72px] justify-between bg-[#212121] group fixed bottom-0 z-10 sm:px-0 ${currentMusic.song?.id ? "flex" : "hidden"}`}>
+        <div className={`w-full h-[72px] justify-between bg-[#212121] group fixed bottom-0 z-10 sm:px-0 ${currentMusic.song ? "flex" : "hidden"}`}>
             <Slider
                 value={[currentTime]}
                 max={audioRef?.current?.duration ?? 0}
@@ -176,7 +209,7 @@ const Player = () => {
                 </div>
             </div>
             <div data-volume className='h-full hidden sm:flex justify-center items-center mr-1 '>
-                <div  className=' relative transition-opacity flex opacity-0 items-center peer group-hover:opacity-100' >
+                <div className=' relative transition-opacity flex opacity-0 items-center peer group-hover:opacity-100' >
                     <Slider
                         defaultValue={[100]}
                         max={100}
@@ -191,10 +224,10 @@ const Player = () => {
                         }}
                     />
                 </div>
-                <button  className='p-2 ml-2 relative flex gap-x-5 ' onClick={handleClickVolume}>
-                    {isVolumeSilenced ? <BiVolumeMute size={20} className='text-[#909090]' /> : <BiVolumeFull size={20} className='text-[#909090]'/>}
+                <button className='p-2 ml-2 relative flex gap-x-5 ' onClick={handleClickVolume}>
+                    {isVolumeSilenced ? <BiVolumeMute size={20} className='text-[#909090]' /> : <BiVolumeFull size={20} className='text-[#909090]' />}
                 </button>
-                <button className='p-2 ml-2'><RiRepeatLine size={20} className='text-[#909090]' /></button>
+                <button onClick={handleRepeat} className='p-2 ml-2'> {isRepeatOne ? <RepeatOne color='#fff' size={24} className='text-white w-6 h-6' /> : <RiRepeatLine size={20} className={isRepeat ? "text-[#fff]" : 'text-[#909090]'} />}</button>
                 <button className='p-2 ml-2'><IoPlaySkipForwardSharp size={20} className='text-[#909090]' /></button>
                 <button className='p-2 ml-2'><IoPlaySkipForwardSharp size={20} className='text-[#909090]' /></button>
             </div>
