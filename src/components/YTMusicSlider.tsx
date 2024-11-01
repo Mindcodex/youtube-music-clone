@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/carousel"
 import { MdChevronLeft } from "react-icons/md";
 import { MdChevronRight } from "react-icons/md";
-import { useRef, useState } from "react";
+import { useState } from "react";
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
 import { playlists } from '@/lib/data';
@@ -57,7 +57,7 @@ export const YTMusicSlider = ({ title, user = false }: Props) => {
             } setApi={setApi} >
                 <CarouselContent>
                     {playlists.map((playlist) =>
-                        <CarouselItem className="lg:basis-1/6">
+                        <CarouselItem className="lg:basis-1/6" key={playlist.title + "abc"}>
                             <SongCard artists={playlist.artists} key={playlist.title} cover={playlist.cover} name={playlist.title} type='album' id={playlist.albumId} />
                         </CarouselItem>
                     )}

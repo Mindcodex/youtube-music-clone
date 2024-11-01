@@ -3,7 +3,6 @@ import { Slider } from '../Slider'
 import { usePlayer } from './usePlayer'
 import { BiVolumeFull, BiVolumeMute } from 'react-icons/bi'
 import { IoPlaySkipForwardSharp } from 'react-icons/io5'
-import { RiRepeatLine } from 'react-icons/ri'
 import { Repeat, RepeatOne } from '../Icons'
 
 export const PlayBackSettings = () => {   

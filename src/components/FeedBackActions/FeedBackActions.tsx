@@ -7,7 +7,7 @@ type Props = {
     songInfo?: Song
 }
 const FeedBackActions = ({ songInfo }: Props) => {
-    const { isDisliked, isLiked, setIsDisliked, setIsLiked, playlistMusic, setPlaylistMusic} = useContext(SongContext)
+    const { isDisliked, isLiked, setIsDisliked, setIsLiked, setPlaylistMusic} = useContext(SongContext)
     useEffect(() => {
         if (isLiked && songInfo) {
             autogeneratePlaylistSongs.unshift({...songInfo, albumId: 7})
@@ -16,7 +16,7 @@ const FeedBackActions = ({ songInfo }: Props) => {
         else {
             const songIndex = autogeneratePlaylistSongs.findIndex((song) => song.id == songInfo?.id)
             console.log(songIndex)
-            const likedSongs = autogeneratePlaylistSongs.splice(songIndex, 1)
+            // const likedSongs = autogeneratePlaylistSongs.splice(songIndex, 1)
             
         }
     }, [isLiked])
