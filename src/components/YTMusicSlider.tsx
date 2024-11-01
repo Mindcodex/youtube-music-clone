@@ -1,62 +1,34 @@
 "use client"
-import Slick from 'react-slick'
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    type CarouselApi 
+} from "@/components/ui/carousel"
 import { MdChevronLeft } from "react-icons/md";
 import { MdChevronRight } from "react-icons/md";
-import { useRef } from "react";
-
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { playlists} from '@/lib/data';
+import { useRef, useState } from "react";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
+import { playlists } from '@/lib/data';
 import SongCard from './SongCard';
+
 type Props = {
     title: string
     user?: boolean
 }
 
-const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 5,
-    arrows: false,
-    responsive: [
-        {
-            breakpoint: 1024,
-            settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
 
-            }
-        },
-        {
-            breakpoint: 1025,
-            settings: {
-                slidesToShow: 4,
-                slidesToScroll: 3,
-
-            }
-        },
-        {
-            breakpoint: 420,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
-
-            }
-        }
-    ]
-};
 
 export const YTMusicSlider = ({ title, user = false }: Props) => {
-    const $sliderRef = useRef<Slick>(null);
     const showUser = user ? "block" : "hidden"
+    const [api, setApi] = useState<CarouselApi>()
     const next = () => {
-        $sliderRef.current?.slickNext();
+        api?.scrollNext()
     };
     const previous = () => {
-       
-        $sliderRef.current?.slickPrev();
+        api?.scrollPrev()
+
     };
     return (
         <section className="pt-4 xl:pt-8 mb-16 lg:mb-36 w-full" >
@@ -78,13 +50,28 @@ export const YTMusicSlider = ({ title, user = false }: Props) => {
                     <button className=" w-fit h-fit p-2 rounded-full border border-[#fff]/20" onClick={next} ><MdChevronRight /></button>
                 </div>
             </section>
-            <section className=" relative lg:w-full mt-4 ">
-                <Slick ref={$sliderRef} {...settings} >
-                    {playlists.map((playlist) => (
+            <Carousel opts={
+                {
+                    slidesToScroll: 2
+                }
+            } setApi={setApi} >
+                <CarouselContent>
+                    {playlists.map((playlist) =>
+                        <CarouselItem className="lg:basis-1/6">
+                            <SongCard artists={playlist.artists} key={playlist.title} cover={playlist.cover} name={playlist.title} type='album' id={playlist.albumId} />
+                        </CarouselItem>
+                    )}
+                </CarouselContent>
+      
+            </Carousel>
+
+            {/* <Slick ref={$sliderRef} {...settings} className=''  >
+                    {playlists.map((playlist) =>
+
                         <SongCard artists={playlist.artists} key={playlist.title} cover={playlist.cover} name={playlist.title} type='album' id={playlist.albumId} />
-                    ))}
-                </Slick>
-            </section>
-        </section>
+
+                    )}
+                </Slick> */}
+        </section >
     )
 }

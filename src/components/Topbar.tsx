@@ -1,10 +1,10 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react'
-import { MdMenu } from 'react-icons/md'
+import { useContext, useEffect, useState } from 'react'
 import { FaChromecast } from 'react-icons/fa'
 import { ToggleSidebarContext } from '@/context/ToggleSideBarContext'
 import SearchBox from './SearchBox'
 import { IoIosSearch } from 'react-icons/io'
+import { Hamburger } from './Icons'
 const Topbar = () => {
   const closeBar = useContext(ToggleSidebarContext)
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,7 +34,7 @@ const Topbar = () => {
             <section className='flex items-center justify-between '>
                 <div className='flex w-16 h-full items-center pl-4 mr-4'>
                     <button className="w-10 h-10 hover:bg-white/15 rounded-full flex justify-center items-center" onClick={handleBar}>
-                        <MdMenu size={24} />
+                        <Hamburger className='w-6 h-6'/>
                     </button>
                 </div>
                 <div className=" flex sm:py-3 sm:px-[100px] justify-between sm:w-full">

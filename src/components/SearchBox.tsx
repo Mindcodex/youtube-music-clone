@@ -22,9 +22,9 @@ const SearchBox = () => {
     }, []);
 
     return (
-        <div className={`hidden sm:flex relative w-[480px] bg-[#606060]/55 rounded-[8px] h-[42px] justify-between items-center border  ${isScrolled? "bg-[#2f2f2f] border-[#555]": "bg-[#606060]/55} border-[#707070]"}`}>
+        <div className={`hidden sm:flex relative w-[480px] bg-[#606060]/55 rounded-[8px] h-[42px] justify-between items-center border  ${isScrolled? "bg-[#2f2f2f] border-white/15": "bg-white/15 border-white/15"}`}>
             <button className="py-2 px-4">
-                <IoIosSearch size={24} className=" text-[#909090]" />
+                <IoIosSearch size={24} className=" text-white/50" />
             </button>
             <Input
                 type='text'

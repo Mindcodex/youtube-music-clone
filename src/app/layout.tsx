@@ -5,7 +5,7 @@ import Sidebar from "@/components/Sidebar";
 import { ToggleProvider } from "@/context/ToggleSideBarContext";
 import Topbar from "@/components/Topbar";
 import ResponsiveMenu from "@/components/ResponsiveMenu";
-import Player from "@/components/Player";
+import { Player } from "@/components/Player/";
 import { SongProvider } from "@/context/SongContext";
 
 
@@ -39,7 +39,7 @@ export default function RootLayout({
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black `}
           >
-            
+            <div className="absolute w-full h-[3px] sm:bg-gradient-to-r from-[#ff0033] to-[#ff268e] from-80%"></div>
             <Sidebar />
             <Topbar />
             <ResponsiveMenu />

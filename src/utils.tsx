@@ -7,7 +7,7 @@ type PageLinksInfo = {
     href: string
 }
 export type PageLinks = PageLinksInfo[]
-export const pagesLinks:PageLinks = [
+export const pagesLinks: PageLinks = [
     {
         linkName: "Principal",
         icon: <GoHomeFill size={24} key="HomeIcon"/>,
@@ -33,3 +33,12 @@ export  const rgbToHex = (r:number, g:number, b:number) => '#' + [r, g, b].map(x
     const hex = x.toString(16)
     return hex.length === 1 ? '0' + hex : hex
 }).join('')
+export const formatTime = (time: number) => {
+    if (!time) return `0:00`
+    if (time == 0 && Number.isNaN(time)) return `0:00`
+
+    const seconds = Math.floor(time % 60)
+    const minutes = Math.floor(time / 60)
+
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`
+}
