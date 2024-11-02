@@ -50,14 +50,14 @@ export const YTMusicSlider = ({ title, user = false }: Props) => {
                     <button className=" w-fit h-fit p-2 rounded-full border border-[#fff]/20" onClick={next} ><MdChevronRight /></button>
                 </div>
             </section>
-            <Carousel opts={
+            <Carousel className="mt-4" opts={
                 {
                     slidesToScroll: 2
                 }
             } setApi={setApi} >
                 <CarouselContent>
                     {playlists.map((playlist) =>
-                        <CarouselItem className="lg:basis-1/6" key={playlist.title + "abc"}>
+                        <CarouselItem className="basis-1/1 lg:basis-1/6 sm:basis-1/3 md:basis-1/3 xl:1/6" key={playlist.title + "abc"}>
                             <SongCard artists={playlist.artists} key={playlist.title} cover={playlist.cover} name={playlist.title} type='album' id={playlist.albumId} />
                         </CarouselItem>
                     )}
@@ -65,13 +65,15 @@ export const YTMusicSlider = ({ title, user = false }: Props) => {
       
             </Carousel>
 
-            {/* <Slick ref={$sliderRef} {...settings} className=''  >
+            {/* 
+                .<Slick ref={$sliderRef} {...settings} className=''  >
                     {playlists.map((playlist) =>
 
                         <SongCard artists={playlist.artists} key={playlist.title} cover={playlist.cover} name={playlist.title} type='album' id={playlist.albumId} />
 
                     )}
-                </Slick> */}
+                </Slick> 
+            */}
         </section >
     )
 }

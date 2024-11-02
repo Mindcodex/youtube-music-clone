@@ -34,7 +34,7 @@ const SongCard = ({ name = "Playlist Name", artists = ["Artist Names"], cover, i
     }
 
     return (
-        <article className="flex flex-col relative">
+        <article className="flex flex-col w-[160px] relative lg:w-fit">
             <header className="mb-2 md:w-[180px] md:h-[180px] w-[160px] h-[160px] lg:w-[193.33px] lg:h-[193.33px] relative cursor-pointer group">
                 <Link href={"/playlist/" + id}>
                     <div className={`absolute w-full h-full justify-center items-center from-black/40 to-transparent ${playlistIndex - 1 == id - 1 ? "bg-gradient-to-b" : " group-hover:bg-gradient-to-b"}`}>
@@ -54,7 +54,7 @@ const SongCard = ({ name = "Playlist Name", artists = ["Artist Names"], cover, i
                 <Link href={"/playlist/" + id}>
                     <h3 className="font-semibold w-fit hover:underline">{name}</h3>
                 </Link>
-                <p className="text-gray-400 w-fit">Álbum • {artists.join(" ")}</p>
+                <p className="text-gray-400 text-wrap">Álbum • {artists.join(" ")}</p>
             </section>
         </article>
     )
